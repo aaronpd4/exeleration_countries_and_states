@@ -28,6 +28,22 @@ function showCountries () {
     }
 }
 
+
+function createDropdown () {
+    var form = document.createElement("form");
+    var label = document.createElement("label");
+    var select = document.createElement("select");
+    var options= [];
+    label.setAttribute("for", "init countries");
+    label.setAttribute("value", "Select a country:");
+    select.setAttribute("name", "init countries");
+    select.setAttribute("id", "init countries");
+    for (let i = 0; i < countriesList.length; i++) {
+        options[i] = document.createElement("option");          //each index in options is now an option (i.e. option[0] is an option, option[1], etc.)
+    }
+
+    //now append the children onto the form (look at bookmarked page)
+}
 //now, need to take each index of countriesList and make an option in the drop down form of it
 
 /* for (index in data) {
