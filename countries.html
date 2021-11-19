@@ -3,25 +3,18 @@
         <head>
             <!--GO TO SLIDE 2/14 ON CODECADEMY FOR INFO ABOUT HTTPS REQUESTS-->>
         </head>
-        <body>
+        <body onload="getHttpRequest()"> <!--making the http GET request as soon as the body loads, instead of waiting for a button click, as that takes too much time-->
             <header>
                 <h1>Here's some text</h1>
             </header>
             <script src="countries_JS.js"></script>             <!--Including the js code that way we can access the data using http requests-->>
             <div id="initial dropdown">
-                <button type="button" onclick="getHttpRequest()">Test</button>
+               
                 
-                <script></script>
                 <form>
-                    <label for="init countries">Select a Country:</label>
-                    <select name="init countries" id="init countries">
-                        <!--need to get the value params to = the id/code of each object--->
-                        <!--need to make the dropdown values (i.e. the white text) to be the names of each object-->
-                        
-                        
-
-                        
-                    </select>
+                    <label for="initCountries">Select a Country:</label>
+                    <!--when the drop down is clicked, the options are all appened and the options are created in the dropdown-->
+                    <select name="initCountries" id="initCountries" onclick="createOptions()"></select> 
                 </form>
                 <!--</form>--->
             </div>>
