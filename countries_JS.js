@@ -2,7 +2,8 @@
 
 let countriesURL = ("https://xc-countries-api.herokuapp.com/api/countries/");
 var countriesList = [];
-var options= [];
+var options = [];
+var selectedOption = [];
 
 
 //use fetch() to send a GET rquest and then it will return a list of objects of the different states.
@@ -38,4 +39,25 @@ function createOptions () {
             initCountries.appendChild(options[i], undefined);           //now append the children onto the form (look at bookmarked page)
         }
     }
+}
+
+function selectedOption () {
+    var countriesDropdown = document.getElementById("initCountries");
+    
+    //get the actual selected value option (i.e., the name of the option chosen). countriesDropdown.options[] allows us to choose the which option what chosen by 
+    //[countiresDropdown.selectedInex], which is the specific index that the user has clicked on. The .text means to get the actual 'name' of the option
+    var selectedCountry = countriesDropdown.options[countriesDropdown.selectedIndex].text;
+    
+    console.log(selectedCountry);
+
+    //now need to work on adding the options into a list, and also check for duplicates
+    //once in list, work on adding them to the new GET api thing
+
+    /* for (var index = 0; index< options.length; index++) {
+        if(selectedCountry == options[index].name) {
+           //populate new dropdown with selected country 
+           console.log(selectedCountry);
+           break;
+        }
+    } */
 }
