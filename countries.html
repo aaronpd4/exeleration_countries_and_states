@@ -3,27 +3,26 @@
         <head>
             <!--GO TO SLIDE 2/14 ON CODECADEMY FOR INFO ABOUT HTTPS REQUESTS-->>
         </head>
-        <body onload="getHttpRequest()"> <!--making the http GET request as soon as the body loads, instead of waiting for a button click, as that takes too much time-->
+        <body onload="getHttpRequest()"> <!--making the http GET request as soon as the body loads, as well as loading in the dropdown options and their states initialy-->
             <header>
-                <h1>Here's some text</h1>
+                <h1>Countries Selector</h1>
             </header>
-            <script src="countries_JS.js"></script>             <!--Including the js code that way we can access the data using http requests-->>
+            <script src="countries_JS.js"></script>             <!--Including the js code that way we can access the data using http requests-->
             <div id="initial dropdown">
                
                 
                 <form>
                     <label for="initCountries">Select a Country:</label>
-                    <!--when the drop down is clicked, the options are all appened and the options are created in the dropdown-->
-                    <select name="initCountries" id="initCountries" onclick="createOptions()"></select> 
+                    <select name="initCountries" id="initCountries" onchange="selectedOption()"></select> 
                 </form>
+
                 <br>
-                <input type= "button", onclick="selectedOption()", value="Click to load states into dropdown"></input>
-                <br>
-                <br>
+                
                 <h3>Click the dropdown below to show possible states</h3>
+
                 <form>
                     <label for= "initStates">Select a State:</label>
-                    <select name="initStates" id="initStates" onclick="createStatesDropdown()"></select>
+                    <select name="initStates" id="initStates"></select>
                 </form>
 
             </div>
