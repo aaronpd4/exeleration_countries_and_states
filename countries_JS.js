@@ -1,7 +1,7 @@
 /*This is the code that pulls GET and POST requests from the "https://xc-countries-api.herokuapp.com/api/countries/" site*/
 
 let countriesURL = ("https://xc-countries-api.herokuapp.com/api/countries/");
-let HttpURLConnection = "";
+let statesURL = ("https://xc-countries-api.herokuapp.com/api/states/");
 let emptyCountriesURL = ("https://xc-countries-api.herokuapp.com/api/countries/<country_code>/states/");
 
 var countriesList = [];
@@ -115,8 +115,8 @@ function addCountryUsingHttpPushRequest() {
     //Base the POST request off of the submit button
 
     //dont need to send id; its already generated, and code to be first 4 letters of name
-    let jsonInputString = {"code": `${newCountryCode}`, "name": `${newCountry}`};
-    console.log(jsonInputString);
+    let jsonInputStringCountry = {"code": `${newCountryCode}`, "name": `${newCountry}`};
+    console.log(jsonInputStringCountry);
 
     $.ajax({
        type: "POST",
@@ -132,4 +132,47 @@ function addCountryUsingHttpPushRequest() {
     });
 
      document.getElementById("submitNewCountry").submit();
+}
+
+
+//TODO: Create the functionality that adds states to
+//similar to the country addition, create THREE text inputs to choose the code of the new state, the name, and then the country ID it belongs to
+
+function addStateUsingHttpPushRequest() {
+    var newStateName = document.getElementById("newStateName").value;
+    var newStateCode = document.getElementById("newStateCode").value;
+    var newStateCountry = document.getElementById("newStateCountry").value;
+    var newStateCountryId;
+
+    //loop through the countries list to see if the country the state to be added to exists
+    for (let i = 0; i < countriesList.length; i++) {
+        if (newStateCountry == countriesList[i].name) {
+            newStateCountryId = countriesList[i].id;
+            break;
+        }
+    }
+
+    //truthy check to make sure that newStateCountryId isn't null (i.e. the country exists)
+    if (newStateCountryId) {
+        let jsonInputStringState = {"code": `${newStateCode}`, "name": `${newStateName}`, "countryId": `${newStateCountryId}`};
+        console.log(jsonInputStringState);
+
+        $.ajax({
+            type: "POST",
+            url: statesURL,
+            data: JSON.stringify({"code": `${newStateCode}`, "name": `${newStateName}`, "countryId": `${newStateCountryId}`}),
+            contentType: "application/json",
+            success: function (result) {
+                console.log(result);
+            },
+            error: function (result, status) {
+                console.log(result);
+            }
+            });
+
+        document.getElementById("submitNewState").submit();
+    }
+    else {
+        window.alert("Country does not exist; please enter a valid country!");
+    }
 }
