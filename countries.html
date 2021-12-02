@@ -4,6 +4,7 @@
             <!--GO TO SLIDE 2/14 ON CODECADEMY (Learn HTML, Learn Forms, Forms, 2/14)FOR INFO ABOUT HTTPS REQUESTS-->>
         </head>
         <body onload="getHttpRequest()"> <!--making the http GET request as soon as the body loads, as well as loading in the dropdown options and their states initialy-->
+            <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
             <header>
                 <h1>Countries Selector</h1>
             </header>
@@ -22,10 +23,15 @@
 
                     <br>
                     <br>
-
-                    <label for="newCountry">If your country is not shown, enter it below:</label>
+                </form> 
+                <form id="submitNewCountry" action="https://xc-countries-api.herokuapp.com/api/countries/" method="POST">
+                    <label for="newCountryName">If your country is not shown, enter its name followed by its code below:</label>
                     <br>
-                    <input type="text" name="newCountry" value="">
-                </form>         
+                    <br>
+                    <input type="text" id= "newCountryName" name="newCountryName">
+                    <input type="text" id= "newCountryCode" name="newCountryCode">
+                    <input type="submit" value="Submit" onclick="addCountryUsingHttpPushRequest()">
+                </form>
+                        
         </body>
     </html>
