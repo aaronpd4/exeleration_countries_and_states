@@ -1,33 +1,31 @@
 <!DOCTYPE html>
     <html>
         <head>
-            <!--GO TO SLIDE 2/14 ON CODECADEMY FOR INFO ABOUT HTTPS REQUESTS-->>
+            <!--GO TO SLIDE 2/14 ON CODECADEMY (Learn HTML, Learn Forms, Forms, 2/14)FOR INFO ABOUT HTTPS REQUESTS-->>
         </head>
         <body onload="getHttpRequest()"> <!--making the http GET request as soon as the body loads, as well as loading in the dropdown options and their states initialy-->
             <header>
                 <h1>Countries Selector</h1>
             </header>
             <script src="countries_JS.js"></script>             <!--Including the js code that way we can access the data using http requests-->
-            <div id="initial dropdown">
-               
-                
+
+            <div id="countriesForm">
                 <form>
                     <label for="initCountries">Select a Country:</label>
                     <select name="initCountries" id="initCountries" onchange="selectedOption()"></select> 
-                </form>
 
-                <br>
-                
-                <h3>Click the dropdown below to show possible states</h3>
+                    <br>
 
-                <form>
+                    <h3>Click the dropdown below to show possible states</h3>
                     <label for= "initStates">Select a State:</label>
                     <select name="initStates" id="initStates"></select>
-                </form>
 
-            </div>
+                    <br>
+                    <br>
 
-            
-
+                    <label for="newCountry">If your country is not shown, enter it below:</label>
+                    <br>
+                    <input type="text" name="newCountry" value="">
+                </form>         
         </body>
     </html>
