@@ -1,10 +1,13 @@
 /*This is the code that pulls GET and POST requests from the "https://xc-countries-api.herokuapp.com/api/countries/" site*/
 
 let countriesURL = ("https://xc-countries-api.herokuapp.com/api/countries/");
+let HttpURLConnection = "";
 let emptyCountriesURL = ("https://xc-countries-api.herokuapp.com/api/countries/<country_code>/states/");
 
 var countriesList = [];
 var countryStatesList = [];
+
+var numOfCountries;
 
 var options = [];
 var stateOptions = [];
@@ -25,11 +28,13 @@ function getHttpRequest () {
     .then(response => response.json())
     .then(data => {
         if (countriesList.length === 0) {
-            countriesList = data;           //make countriesList have all the data from the GET call (countriesList[i] = {id=0, code=AU, name=Austrailia}, etc.)
+            countriesList = data;                                        //make countriesList have all the data from the GET call (countriesList[i] = {id=0, code=AU, name=Austrailia}, etc.)
         }
+        numOfCountries = countriesList.length; 
+        //console.log(numOfCountries);                                  //used to validate size of array
         countriesList.sort((a, b) => a.name.localeCompare(b.name));     //this line sorts the countries by name using "a.localeCompare(b)"
         showCountries();
-        createOptions();                    //this line HAS to go inside the data arrow function (for some reason?)
+        createOptions();                                                //this line HAS to go inside the data arrow function (for some reason?)
     });
     
 }
@@ -102,5 +107,29 @@ function createStatesDropdown () {
         prevCountryName = selectedCountryName;
 }
 
+function addCountryUsingHttpPushRequest() {
+    var newCountry = document.getElementById("newCountryName").value;       //gets the input from the textbox (name)
+    var newCountryCode = document.getElementById("newCountryCode").value;   //"                             " (code)
 
-//TODO: create a method to add new countries and then push them
+    //create a new text input for country code (new getElementId call needed)
+    //Base the POST request off of the submit button
+
+    //dont need to send id; its already generated, and code to be first 4 letters of name
+    let jsonInputString = {"code": `${newCountryCode}`, "name": `${newCountry}`};
+    console.log(jsonInputString);
+
+    $.ajax({
+       type: "POST",
+       url: countriesURL,
+       data: JSON.stringify({"code" : `${newCountryCode}`, "name": `${newCountry}`}),
+       contentType: "application/json",
+       success: function (result) {
+         console.log(result);
+       },
+       error: function (result, status) {
+         console.log(result);
+       }
+    });
+
+     document.getElementById("submitNewCountry").submit();
+}
