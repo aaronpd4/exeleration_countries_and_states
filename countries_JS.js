@@ -2,10 +2,13 @@
 
 let countriesURL = ("https://xc-countries-api.herokuapp.com/api/countries/");
 let emptyCountriesURL = ("https://xc-countries-api.herokuapp.com/api/countries/<country_code>/states/");
+
 var countriesList = [];
 var countryStatesList = [];
+
 var options = [];
 var stateOptions = [];
+
 var selectedCountryName = "";
 var prevCountryName = "";
 var created = false;
@@ -24,6 +27,7 @@ function getHttpRequest () {
         if (countriesList.length === 0) {
             countriesList = data;           //make countriesList have all the data from the GET call (countriesList[i] = {id=0, code=AU, name=Austrailia}, etc.)
         }
+        countriesList.sort((a, b) => a.name.localeCompare(b.name));     //this line sorts the countries by name using "a.localeCompare(b)"
         showCountries();
         createOptions();                    //this line HAS to go inside the data arrow function (for some reason?)
     });
@@ -71,43 +75,27 @@ function listStatesForSelCountry (countryCode) {
     .then(response => response.json())
     .then(data => {
         countryStatesList = data;
+        countryStatesList.sort((a,b) => a.name.localeCompare(b.name));          //this line sorts the countries by name using "a.localeCompare(b)""
         showCountriesStates();
         createStatesDropdown();
     });
 }
 
 function createStatesDropdown () {
-        //dynamically create an dropdown list
-        /* if (!created) {
-            //dynamically create the DDL
-            var select = document.createElement("select");
-            select.name = "initStates";
-            select.id = "initStates";
-            for (var k = 0; k < countryStatesList.length; k++) {
-                var option = document.createElement("option");
-                option.value = countryStatesList[k].code;
-                option.text = countryStatesList[k].name;
-                select.appendChild(option);
-            }
-        }
-        created = true; */
-        
-        //remove all prev dropdown options
         var x = document.getElementById("initStates");
         var size = (x.options.length - 1);
-        //if (selectedCountryName != prevCountryName) {
-            for (let j = size; j >= 0; j--) {
-                x.remove(j);
-            }
 
-            //clearing the stateOptions s.t. we can assign new options to the dropdown list
-            stateOptions = [];
+        for (let j = size; j >= 0; j--) {
+            x.remove(j);
+        }
 
-            for (let i = 0; i < countryStatesList.length; i++) {
-                stateOptions[i] = new Option(`${countryStatesList[i].name}`, `${countryStatesList[i].code}`);      
-                initStates.appendChild(stateOptions[i], undefined);
-            }
-        //}
+        //clearing the stateOptions s.t. we can assign new options to the dropdown list
+        stateOptions = [];
+
+        for (let i = 0; i < countryStatesList.length; i++) {
+            stateOptions[i] = new Option(`${countryStatesList[i].name}`, `${countryStatesList[i].code}`);      
+            initStates.appendChild(stateOptions[i], undefined);
+        }
 
         //resetting the values s.t. there are no duplicates and the country can change
         countryStatesList = [];
@@ -115,4 +103,4 @@ function createStatesDropdown () {
 }
 
 
-//TODO: sort the countries and states by alpha, create a method to add new countries and then push them
+//TODO: create a method to add new countries and then push them
