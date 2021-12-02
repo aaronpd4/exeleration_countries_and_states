@@ -32,6 +32,17 @@
                     <input type="text" id= "newCountryCode" name="newCountryCode">
                     <input type="submit" value="Submit" onclick="addCountryUsingHttpPushRequest()">
                 </form>
+                <form id="submitNewState" action="https://xc-countries-api.herokuapp.com/api/states/" method="POST">
+                    <br>
+                    <label for="newStateName">If your state is not shown, enter its name, code, and country below:</label>
+                    <br>
+                    <br>
+                    <input type="text" id="newStateName" name="newStateName">
+                    <input type="text" id="newStateCode" name="newStateCode">
+                    <input type="text" id="newStateCountry" name="newStateCountry">
+                    <input type="submit" value="Submit" onclick="addStateUsingHttpPushRequest()">
+
+                </form>
                         
         </body>
     </html>
